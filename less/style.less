@@ -1,0 +1,167 @@
+//  IMPORT FILES
+
+@import "elements.less";
+@import "bootstrap/bootstrap.less";
+
+// COLOR //
+@hitam: #000;
+@biru: #193441;
+@putih: #fff;
+@coklat: #3E606F;
+@abu: #555;
+@krem: #D1DBBD;
+
+// Grayscale
+@black-10:                 darken(#fff, 10%);
+@black-20:                 darken(#fff, 20%);
+@black-30:                 darken(#fff, 30%);
+@black-40:                 darken(#fff, 40%);
+@black-50:                 darken(#fff, 50%);
+@black-60:                 darken(#fff, 60%);
+@black-70:                 darken(#fff, 70%);
+@black-80:                 darken(#fff, 80%);
+@black-90:                 darken(#fff, 90%);
+
+// Links
+@link-color:              @abu;
+@link-color-hover:        darken(@link-color, 15%);
+
+//NAVBAR
+@navbar-height:         90px;   //height
+
+.navbar{
+    li
+    {
+        a{
+            &:hover { background: none;}
+        }   
+    }
+    
+    background-color: @putih;
+    .drop-shadow();
+    .navbar-brand {font-size: 30px;  &:hover { color: @link-color-hover; }}
+    a{
+        text-decoration: none;
+        color: @link-color;
+        &:hover { color: @link-color-hover; }
+        &:visited { color: @link-color; }
+    }
+}
+.dropdown:hover .dropdown-menu {
+    margin-top: -25px;
+    display: block;
+ }
+
+//CONTAINER
+.page-header{
+   margin-top: @navbar-height + 55px;   
+}
+
+//Tips
+.tips{
+    .make-row();   
+}
+.post{
+    .make-lg-column(4);
+    .make-md-column(4);
+    .make-sm-column(4);
+    .make-xs-column(4);
+    background: @black-10;
+    .bordered(@putih,@putih,@putih,@putih);
+    .border-radius(15px,15px,15px,15px);
+     height: 250px;
+     .box-shadow(inset 0 0 1px @black-20)
+}
+
+//About
+.about{
+    .make-row();
+    margin-top: @navbar-height + 50px;
+    min-height: 450px;
+}
+.foto{
+    .center-block();
+	width: 200px;
+	height: 200px;
+	border-radius: 150px;
+	-webkit-border-radius: 150px;
+	-moz-border-radius: 150px;
+	background: url("../images/me.jpg") no-repeat;
+	background-size: cover;
+	display: block;
+}
+.deskripsi{
+    text-align:center;
+    display: block;
+    h1 { font-size: 3em;
+    text-transform: uppercase;
+    }
+}
+
+//HOTSPOTS
+.hotspots{
+    .make-row();
+    
+}
+ul.rig {
+	list-style: none;
+	font-size: 0px;
+	margin-left: -2.5%; /* should match li left margin */
+}
+ul.rig li {
+	display: inline-block;
+	padding: 10px;
+	margin: 0 0 2.5% 2.5%;
+	background: #fff;
+	border: 1px solid #ddd;
+	font-size: 16px;
+	font-size: 1rem;
+	vertical-align: top;
+	box-shadow: 0 0 5px #ddd;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+ul.rig li img {
+	max-width: 100%;
+	height: auto;
+	margin: 0 0 10px;
+}
+ul.rig li h3 {
+	margin: 0 0 5px;
+}
+ul.rig li p {
+	font-size: .9em;
+	line-height: 1.5em;
+	color: #999;
+}
+/* class for 2 columns */
+ul.rig.columns-2 li {
+	width: 47.5%; /* this value + 2.5 should = 50% */
+}
+/* class for 3 columns */
+ul.rig.columns-3 li {
+	width: 30.83%; /* this value + 2.5 should = 33% */
+}
+/* class for 4 columns */
+ul.rig.columns-4 li {
+	width: 22.5%; /* this value + 2.5 should = 25% */
+}
+ 
+@media (max-width: 480px) {
+	ul.grid-nav li {
+		display: block;
+		margin: 0 0 5px;
+	}
+	ul.grid-nav li a {
+		display: block;
+	}
+	ul.rig {
+		margin-left: 0;
+	}
+	ul.rig li {
+		width: 100% !important; /* over-ride all li styles */
+		margin: 0 0 20px;
+	}
+}
+

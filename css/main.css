@@ -1,0 +1,13 @@
+@import url(nav.css);
+
+body{
+     padding-top: 100px;   
+}
+.post{
+
+    margin-bottom: 30px;
+}
+.sidebar{
+     
+    height: 500px;
+}
