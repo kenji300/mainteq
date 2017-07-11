@@ -149,27 +149,27 @@ $user = new User();
                                              <ul>
                                              <li id="first" class="firstanimation">  <!-- ID for tooltip and class for animation -->
                                              <a> <img src="images/1.jpg" alt="med" width="500" height="320" /> </a>
-                                             <div class="tooltip"> <h1>Cougar</h1> </div>
+                                             <div class="tooltip"> <h1>first</h1> </div>
                                              </li>
 
                                              <li id="second" class="secondanimation">
                                              <a> <img src="images/mainteq2.jpg" alt="aliens" width="500" height="320" /> </a>
-                                             <div class="tooltip"> <h1>Lions</h1> </div>
+                                             <div class="tooltip"> <h1>second</h1> </div>
                                              </li>
 
                                              <li id="third" class="thirdanimation">
                                              <a> <img src="images/mainteq3.jpg" alt="Snowalker" width="500" height="320"/> </a>
-                                             <div class="tooltip"> <h1>Snowalker</h1> </div>
+                                             <div class="tooltip"> <h1>third</h1> </div>
                                              </li>
 
                                              <li id="fourth" class="fourthanimation">
                                              <a> <img src="images/2.jpg" alt="Howling"width="500" height="320"/> </a>
-                                             <div class="tooltip"> <h1>Howling</h1> </div>
+                                             <div class="tooltip"> <h1>fourth</h1> </div>
                                              </li>
 
                                              <li id="fifth" class="fifthanimation">
                                              <a> <img src="images/3.jpg" alt="Sunbathing" width="500" height="320"/> </a>
-                                             <div class="tooltip"> <h1>Sunbathing</h1> </div>
+                                             <div class="tooltip"> <h1>fifth</h1> </div>
                                              </li>
                                              </ul>
 
@@ -191,32 +191,32 @@ $user = new User();
               	<li>
               		<img src="images/screen.png" class="img-rounded"/>
               		<h3>Monitor Repair</h3>
-              		<p>BLA BLA BLA</p>
+              		
               	</li>
               	<li>
               		<img src="images/projector.png" class="img-rounded"/>
               		<h3>Projector Repair</h3>
-              		<p>BLA BLA BLA</p>
+              		
               	</li>
               	<li>
               		<img src="images/remote-control.png" class="img-rounded"/>
               		<h3>Digital Signage Repair</h3>
-              		<p>BLA BLA BLA</p>
+              		
               	</li>
               	<li>
               		<img src="images/onsite-repair.png" class="img-rounded"/>
               		<h3>On-Site Repair</h3>
-              		<p>BLA BLA BLA</p>
+              		
               	</li>
               	<li>
               		<img src="images/event-installation.png" class="img-rounded"/>
               		<h3>Event Installation</h3>
-              		<p>BLA BLA BLA</p>
+              		
               	</li>
               	<li>
               		<img src="images/tft-repair.png" class="img-rounded"/>
               		<h3>TFT Repair</h3>
-              		<p>BLA BLA BLA</p>
+              		
               	</li>
               </ul>
 				</div>

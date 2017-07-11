@@ -61,12 +61,15 @@ class csv extends mysqli
 
 	public function export()
 	{
+
+		require_once('classes/redirect.php');
 		$this->state_csv = false;
 		$query = "SELECT * FROM complaints as c";
 		$run = $this->query($query);
 		if ($run->num_rows > 0) {
 		 	$fn = "Report".uniqid().".csv";
-		 	$file = fopen("classes/".$fn,"w");
+		 	$file = fopen("download/".$fn,"w");
+
 		 	while ($row = $run->fetch_array(MYSQLI_NUM)) 
 		 	{
 		 		if (fputcsv($file, $row)) 
@@ -76,15 +79,27 @@ class csv extends mysqli
 		 			$this->state_csv = false;
 		 		}
 		 	}
+		 	Redirect::to("download/".$fn);
+
 		 	if ($this->state_csv) {
-		 		$nasigoreng = "Exported";
+		 		echo "Exported";
 		 	} else {
-		 		$nasigoreng = "export failed";
+		 		echo "export failed";
 		 	}
+
+		 	
 
 		 } else {
 		 	echo "No data found";
 		 } 
+	}
+
+	public function download()
+	{
+		require_once('classes/redirect.php');
+		Redirect::to("download/Report59653d034c5a8.csv");
+
+
 	}
 
 	public function test($file)

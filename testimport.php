@@ -4,6 +4,7 @@ $csv = new csv();
 include('classes/search.php');
 $search = new search();
 
+ $search_results = false;
 
 if (isset($_POST['submit'])) 
 {
@@ -13,6 +14,7 @@ if (isset($_POST['submit']))
 }
 
 if(isset($_POST['download'])) {
+  
   $csv->export();
 }
 
@@ -49,7 +51,7 @@ if(isset($_GET['search']))
 </form>     
 
 <form method="post">
- <input type="submit" name="download">
+ <input type="submit" value="download" name="download">
 </form>
 
 <form method="get">
