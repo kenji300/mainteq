@@ -132,7 +132,7 @@ input[type=text]:focus {
 
           <?php if(!$search_results) {?>
           <tr>
-            <td colspan="4"> Please search</td>
+            <td colspan="5"> Please search</td>
           </tr>
           <?php 
           } else { foreach ($search_results['results'] as $search_result) :  ?>

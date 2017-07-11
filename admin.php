@@ -21,7 +21,7 @@ if(isset($_POST['download']))
 {
   $csv->export();
 
-  
+
 }
 
 if (isset($_GET['week'])) 
@@ -185,11 +185,7 @@ input[type=text]:focus {
        
       <button type="submit" name="submit" value="import">Upload</button>
 
-      <a href="download/Report59653d034c5a8.csv">nasi</a>
-      
-
       </form>
-      <a href="download/Report59653d034c5a8.csv">nasi</a>  
       </section>
 
     </div><!-- @end #content -->
