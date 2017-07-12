@@ -57,7 +57,7 @@
 						{
 							if($file_size <= 2097152)
 							{
-								$file_name_new = $serialNumber.uniqid('',true).'.'.$file_ext;
+								$file_name_new = $serialNumber.'_'.uniqid('',true).'_case '.$caseid.'.'.$file_ext;
 								$file_destination = $UploadFolder.'/'.$file_name_new;
 
 								if (move_uploaded_file($file_tmp, $file_destination)) {

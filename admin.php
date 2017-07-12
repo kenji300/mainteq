@@ -1,6 +1,11 @@
 <?php
 require_once 'core/init.php';
 
+
+if(!$user->isLoggedIn()) {
+        Redirect::to('index.php');
+        }
+
 include('classes/csv.php');
 //Create new user object
 $user = new User();
@@ -12,7 +17,7 @@ $admin_search_results =  false;
 if(isset($_POST["submit"]))
 {
   
- 
+  $csv->truncate();
   $csv->import($_FILES['file']['tmp_name']);
 
 }
