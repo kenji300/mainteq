@@ -93,32 +93,13 @@ if(Input::exists()) {
            ));
            
 
-           if(isset($_FILES['image']))
-              {
-                  $file_name = $_FILES['image']['name'];
-                  $file_size =$_FILES['image']['size'];
-                  $file_tmp =$_FILES['image']['tmp_name'];
-                  $file_type=$_FILES['image']['type'];   
-                  $file_ext=strtolower(end(explode('.',$_FILES['image']['name'])));
-                  $extensions = array("jpeg","jpg","png");    
-                  if(in_array($file_ext,$extensions )=== false){
-                   $errors[]="extension not allowed, please choose a JPEG or PNG file.";
-                  }
-                  if($file_size > 2097152){  
-                  $errors[]='File size must be exactly 2 MB';
-                  }       
-                  if(empty($errors)==true){
-                      move_uploaded_file($file_tmp,"images/".$file_name);
-                      echo "Success";
-                       $user->update(array(
-                              'image' => $file_name));
-                       Redirect::to('profile2.php');
+           if(isset($_FILES['files']))
+            {
+               $filename = $_FILES['files'];
+               $serialnumber = $_POST['serial_numbers'];
 
-                     
-                  }else{
-                      print_r($errors);
-                  }
-              }
+               $upload = $upload_image->upload($filename, $serialnumber);
+            }
 
           if (isset($_POST['Email'])) 
             {
@@ -200,7 +181,7 @@ if(Input::exists()) {
           <!-- end of header -->
 
           <div id="report" class="page-header2">
-          	<form action="" method="post">
+          	<form action="" method="post" enctype="multpart/form-data">
           	
           	<span>Brand: </span>
           	<select id="Brand" name="Brand" method="post">
@@ -285,10 +266,10 @@ if(Input::exists()) {
 
     			<textarea name="Complaint_Details" rows="5" cols="40" placeholder="Complaint Details" id="Complaint Details"></textarea><br>
     			<label>Upload Photo:</label>
-    			<input type="file" name="image" /><br>
+    			<input type="file" name="files[]" multiple="multiple" /><br>
 
     			 
-    			 <button type="submit">Submit form</button>
+    			 <button type="submit" name="btnSubmit">Submit form</button>
 
         </form>
       </div>

@@ -20,6 +20,8 @@ class Complaint{
         if(!$this->_db->insert('complaints', $fields)){
             throw new Exception('There was a problem creating the form');
         }
+
+        $last_id = lastInsertId();
     }
     
    
