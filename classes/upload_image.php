@@ -34,7 +34,7 @@
 
 
 
-	public function upload($imagefile, $serialNumber)
+	public function upload($imagefile, $serialNumber, $caseid)
 	{
 				$errors = array();
 				$uploadedFiles = array();
@@ -82,12 +82,7 @@
 					}
 
 
-					$last_id = $this->insert_id();
-
-
-
-
-					$q = "INSERT into images (image, cust_id) values ('{$uploadedFiles[$position]}', '{$last_id}')";
+					$q = "INSERT into images (image, case_id) values ('{$uploadedFiles[$position]}', '{$caseid}')";
     				$query = $this->query($q);
 
 				}

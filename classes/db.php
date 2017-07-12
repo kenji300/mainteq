@@ -22,6 +22,12 @@ class DB{
          } catch(PDOException $e){
              die($e->getMessage());
          }       
+
+    }
+
+    public function get_last_id()
+    {
+        return $this->_pdo->lastInsertId();
     }
             
     //Methods
