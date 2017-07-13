@@ -69,6 +69,7 @@ if(Input::exists()){
                    'region' => Input::get('region'),
                    'zip_code' => Input::get('zip_code'),
                    'country' => Input::get('country'),
+                   'region' => Input::get('region'),
                    'email' => Input::get('email')
                 ));
                 Redirect::to('profile2.php');

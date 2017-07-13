@@ -85,12 +85,21 @@ $user = new User();
                            <li class="dropdown">
                               <a href="">Hi <?php echo escape($user->data()->first_name); ?> <b class="caret"></b></a> 
                               <ul class="dropdown-menu">
+
+                             <?php if ($user->hasPermission('admin')) { ?> 
+                                
+                                <li><a href="admin.php">Admin Page</a></li>
+
+                                <?php } else { ?>
                                 <li><a href="profile2.php">Profile</a></li>
+                                <?php } ?>
+
                                 <li><a href="logout.php">Logout</a></li>
                               </ul>
+
                            
                            <?php
-                           } else { ?> 
+                           }  else { ?> 
                            <li class="dropdown">
                             <a href="login.php">Login</a>
                               <ul class="dropdown-menu">

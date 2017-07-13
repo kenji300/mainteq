@@ -204,9 +204,11 @@ if(Input::exists()) {
           	<select id="Brand" name="Brand" method="post">
           	<option>LCD Monitor</option>
           	<option>Projector</option>
-          	<option>Digital Signage</option>
+          	<option>Large Format Display</option>
           	
           	</select><br>
+
+            <?php if ($user->isLoggedIn()) { ?>
 
           	<label>Name :</label>
           	<input type="text" name="First_Name" id=" First Name" placeholder=" First name" value="<?php echo escape($user->data()->first_name); ?> ">
@@ -222,6 +224,26 @@ if(Input::exists()) {
           	<input type="text" name="City" id="City" placeholder="City" value="<?php echo escape($user->data()->city); ?> ">
           	<input type="text" name="Region" id="Region" placeholder="Region" value="<?php echo escape($user->data()->region); ?> "><br>
           	<input type="text" name="Postal_code" id="Postal code" placeholder="postal/zip code" value="<?php echo escape($user->data()->zip_code); ?> "><br>
+
+
+            <?php } else { ?>
+
+            <label>Name :</label>
+            <input type="text" name="First_Name" id=" First Name" placeholder=" First name" value="">
+            <input type="text" name="Last_Name" id=" Last Name" placeholder=" Last name" value="">
+            <br>
+
+            <label>E-mail :</label>
+            <input type="text" name="Email" id="Email" placeholder="Email" value=""><br>
+
+            <label>Address :</label>
+            <input type="text" name="Address_line 1" id="Address line 1" placeholder="address" value=""><br>
+            <input type="text" name="Address_line 2" id="Address line 2" placeholder="address 2" value=""><br>
+            <input type="text" name="City" id="City" placeholder="City" value="">
+            <input type="text" name="Region" id="Region" placeholder="Region" value=""><br>
+            <input type="text" name="Postal_code" id="Postal code" placeholder="postal/zip code" value=""><br>
+
+            <?php } ?>
 
           	<span>Country:</span>
           	<select id="Country" name="Country" method='post'>
