@@ -2,13 +2,25 @@
 require_once 'core/init.php';
 
 
-if(!$user->isLoggedIn()) {
-        Redirect::to('index.php');
-        }
-
 include('classes/csv.php');
 //Create new user object
 $user = new User();
+
+
+
+if($user->isLoggedIn()) {
+  if(!$user->hasPermission('admin')) 
+  {
+    Redirect::to('index.php');
+  }
+        
+}
+
+if (!$user->isLoggedIn()) 
+{
+  Redirect::to('index.php');
+}
+
 $csv = new csv();
 $admin_search_results =  false;
 

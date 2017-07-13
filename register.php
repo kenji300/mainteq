@@ -46,6 +46,7 @@ if(Input::exists()) {
                'country' => Input::get('country'),
                'joined' => date('Y-m-d H:i:s'),
                'email' => Input::get('email'),
+               'group' => 1,
                'image' => "avatar.png"
            ));
            
