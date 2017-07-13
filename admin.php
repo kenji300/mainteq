@@ -1,9 +1,26 @@
 <?php
 require_once 'core/init.php';
 
+
 include('classes/csv.php');
 //Create new user object
 $user = new User();
+
+
+
+if($user->isLoggedIn()) {
+  if(!$user->hasPermission('admin')) 
+  {
+    Redirect::to('index.php');
+  }
+        
+}
+
+if (!$user->isLoggedIn()) 
+{
+  Redirect::to('index.php');
+}
+
 $csv = new csv();
 $admin_search_results =  false;
 
@@ -12,7 +29,7 @@ $admin_search_results =  false;
 if(isset($_POST["submit"]))
 {
   
- 
+  $csv->truncate();
   $csv->import($_FILES['file']['tmp_name']);
 
 }

@@ -19,8 +19,6 @@ class Input{
             return $_POST[$item];
         } else if (isset($_GET[$item])) {
             return $_GET[$item];
-        } else if(isset($_FILES[$item])) {
-            return $_FILES[$item];
 
         }
 

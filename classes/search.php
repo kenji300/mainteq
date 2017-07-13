@@ -60,6 +60,47 @@ class search extends mysqli
 		;
 	}
 
+	public function profilesearch($search_term)
+	{
+		$sanitized = $this->real_escape_string($search_term);
+
+		$q = "SELECT `RMA No`,`cust_ref_no`, `RMA Ref No`,`Original SN`,`UID Status`,`Tracking No` 
+		FROM `report` 
+		WHERE `RMA No` LIKE '%{$sanitized}%' 
+		OR `cust_ref_no` LIKE '%{$sanitized}%' 
+		OR `RMA Ref No` LIKE '%{$sanitized}%'";
+
+		if(!$sanitized)
+		{
+			echo "please input search term";
+			return false;
+
+		} else {
+			$query = $this->query($q);
+		}
+
+
+
+		if(!$query->num_rows)
+		{
+			
+			echo "something is wrong";
+			return false;
+		}
+
+		while($row = $query->fetch_object())
+		{
+			$rows[] = $row;
+		}
+
+		$search_results = array(
+			'count' => $query->num_rows,
+			'results' => $rows, );
+
+		return $search_results;
+		;
+	}
+
 
 	public function adminsearch($date_data)
 	{

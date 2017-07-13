@@ -34,7 +34,7 @@
 
 
 
-	public function upload($imagefile, $serialNumber)
+	public function upload($imagefile, $serialNumber, $caseid)
 	{
 				$errors = array();
 				$uploadedFiles = array();
@@ -57,7 +57,7 @@
 						{
 							if($file_size <= 2097152)
 							{
-								$file_name_new = $serialNumber.uniqid('',true).'.'.$file_ext;
+								$file_name_new = $serialNumber.'_'.uniqid('',true).'_case '.$caseid.'.'.$file_ext;
 								$file_destination = $UploadFolder.'/'.$file_name_new;
 
 								if (move_uploaded_file($file_tmp, $file_destination)) {
@@ -82,12 +82,7 @@
 					}
 
 
-					$last_id = $this->insert_id();
-
-
-
-
-					$q = "INSERT into images (image, cust_id) values ('{$uploadedFiles[$position]}', '{$last_id}')";
+					$q = "INSERT into images (image, case_id) values ('{$uploadedFiles[$position]}', '{$caseid}')";
     				$query = $this->query($q);
 
 				}

@@ -108,23 +108,37 @@ $user = new User();
               <ul class="dropdown-menu">
                 <li><a href="profile2.php">Profile</a></li>
                 <li><a href="logout.php">Logout</a></li>
-              </ul>
 
-              <?php
-                           } else { ?>
-                <li class="dropdown">
-                  <a href="login.php">Login</a>
-                  <ul class="dropdown-menu">
-                    <li><a href="register.php">Register</a></li>
-                  </ul>
-                  <?php } ?>
+                           <li class="dropdown">
+                              <a href="">Hi <?php echo escape($user->data()->first_name); ?> <b class="caret"></b></a> 
+                              <ul class="dropdown-menu">
 
-          </ul>
-        </div>
-      </nav>
-    </header>
-    <!-- end of header -->
+                             <?php if ($user->hasPermission('admin')) { ?> 
+                                
+                                <li><a href="admin.php">Admin Page</a></li>
 
+                                <?php } else { ?>
+                                <li><a href="profile2.php">Profile</a></li>
+                                <?php } ?>
+
+                                <li><a href="logout.php">Logout</a></li>
+                              </ul>
+
+                           
+                           <?php
+                           }  else { ?> 
+                           <li class="dropdown">
+                            <a href="login.php">Login</a>
+                              <ul class="dropdown-menu">
+                                <li><a href="register.php">Register</a></li>
+                              </ul>
+                           <?php } ?>
+
+                      </ul>
+                  </div>
+              </nav>
+          </header>
+          <!-- end of header -->
     <div id="home" class="parallax vertical-center">
       <div class="slider_content_outer" style="position: relative; height: 100%;">
         <div class="slider_content skrollable skrollable-between" style="position: absolute; width: 98%; left: 0%; top: 33%; opacity: 1;"

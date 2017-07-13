@@ -21,7 +21,12 @@ class Complaint{
             throw new Exception('There was a problem creating the form');
         }
 
-        $last_id = lastInsertId();
+    }
+
+    public function get_last_id() 
+    {
+       return $this->_db->get_last_id();
+
     }
     
    

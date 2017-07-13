@@ -4,6 +4,8 @@ require_once 'core/init.php';
 $complaint = new Complaint();
 $user = new User();
 
+include 'classes/upload_image.php'; 
+$upload_image = new uploadimage();
 
 if(Input::exists()) {
         $validate = new Validate();
@@ -91,15 +93,22 @@ if(Input::exists()) {
                'Incident Country' => Input::get('Incident_Country'),
                'Complaint Details' => Input::get('Complaint_Details'),
            ));
-           
+           $caseID = $complaint->get_last_id();
+           echo $caseID;
+
 
            if(isset($_FILES['files']))
             {
                $filename = $_FILES['files'];
-               $serialnumber = $_POST['serial_numbers'];
+               $serialnumber = $_POST['Serial_numbers'];
 
-               $upload = $upload_image->upload($filename, $serialnumber);
+               $upload = $upload_image->upload($filename, $serialnumber, $caseID);
             }
+
+          
+           
+
+           
 
           if (isset($_POST['Email'])) 
             {
@@ -183,7 +192,7 @@ if(Input::exists()) {
         <!-- end of header -->
 
         <div id="report" class="page-header2">
-            <form action="" method="post" enctype="multpart/form-data">
+            <form action="" method="post" enctype="multipart/form-data">
                 <legend>Choose Type</legend>
                 <div class="form-group ">
                     <label class="control-label " for="Brand">

@@ -1,68 +1,171 @@
 <?php
-    mysqli_connect("localhost", "root", "") or die("Error connecting to database: ".mysqli_error());
-    /*
-        localhost - it's location of the mysql server, usually localhost
-        root - your username
-        third is your password
-         
-        if connection fails it will stop loading the page and display an error
-    */
-     
-    mysqli_select_db(mysqli_connect("localhost", "root", ""),"dbi290400") or die(mysqli_error());
-    /* tutorial_search is the name of database we've created */
-?>
+require_once 'core/init.php';
  
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title>Search results</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" type="text/css" href="style.css"/>
-</head>
-<body>
-<?php
-    $query = $_GET['query']; 
-    // gets value sent over search form
-     
-    $min_length = 3;
-    // you can set minimum length of the query if you want
-     
-    if(strlen($query) >= $min_length){ // if query length is more or equal minimum length then
-         
-        $query = htmlspecialchars($query); 
-        // changes characters used in html to their equivalents, for example: < to &gt;
-         
-        $query = mysqli_real_escape_string($query);
-        // makes sure nobody uses SQL injection
-         
-        $raw_results = mysqli_query("SELECT * FROM articles
-            WHERE (`title` LIKE '%".$query."%') OR (`text` LIKE '%".$query."%')") or die(mysqli_error());
-             
-        // * means that it selects all fields, you can also write: `id`, `title`, `text`
-        // articles is the name of our table
-         
-        // '%$query%' is what we're looking for, % means anything, for example if $query is Hello
-        // it will match "hello", "Hello man", "gogohello", if you want exact match use `title`='$query'
-        // or if you want to match just full word so "gogohello" is out use '% $query %' ...OR ... '$query %' ... OR ... '% $query'
-         
-        if(mysqli_num_rows($raw_results) > 0){ // if one or more rows are returned do following
-             
-            while($results = mysqli_fetch_array($raw_results)){
-            // $results = mysql_fetch_array($raw_results) puts data from database into array, while it's valid it does the loop
-             
-                echo "<p><h3>".$results['title']."</h3>".$results['text']."</p>";
-                // posts results gotten from database(title and text) you can also show id ($results['id'])
-            }
-             
+//Create new user object
+$user = new User();
+
+ if(!$user->isLoggedIn()) {
+        Redirect::to('index.php');
         }
-        else{ // if there is no matching rows do following
-            echo "No results";
-        }
-         
-    }
-    else{ // if query length is less than minimum
-        echo "Minimum length is ".$min_length;
-    }
+
+$search_term = false;
+$search_results = false;
+
+if(isset($_GET['search']))
+{
+
+
+  require_once('classes/search.php');
+
+  $search = new search();
+
+  $search_term = $_GET['search'];
+
+
+  $search_results = $search->search($search_term);
+
+}
+
+
+
 ?>
+
+<!doctype html>
+<html lang="en-US">
+
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html">
+  <title>User Profile </title>
+  
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
+  <script src='http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js'></script>
+  <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+
+<style type="text/css">
+  input[type=text] {
+    width: 180px;
+    height: 32px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+
+ 
+}
+ element.style{
+padding-left: 0px;
+  }
+
+/* When the input field gets focus, change its width to 100% */
+input[type=text]:focus {
+    width: 400px;
+}
+</style>
+</head>
+
+<body>
+              <header>
+              <nav class="navbar navbar-fixed-top" role="navigation">
+                  <div class="container">   
+                      <a class="navbar-brand" href="index.php#tips">MAINTEQ</a>
+                       <ul class="nav navbar-nav navbar-right tinggi kanan">
+                           <li><a href="index.php#tips">Home</a></li> 
+                           <li><a href="index.php#about">About</a></li>   
+                           <li><a href="index.php#service">Services</a></li>
+                           <li><a href="report.php">File a Complaint</a></li>
+
+                           <?php 
+                           // if user is not logged in
+                           if($user->isLoggedIn()) { ?>
+                           <li class="dropdown">
+                              <a href="">Hi <?php echo escape($user->data()->first_name); ?> <b class="caret"></b></a> 
+                              <ul class="dropdown-menu">
+                                <li><a href="profile2.php">Profile</a></li>
+                                <li><a href="logout.php">Logout</a></li>
+                              </ul>
+                           
+                           <?php
+                           } else { ?> 
+                           <li class="dropdown">
+                            <a href="login.php">Login</a>
+                              <ul class="dropdown-menu">
+                                <li><a href="register.php">Register</a></li>
+                              </ul>
+                           <?php } ?>
+
+                      </ul>
+                  </div>
+              </nav>
+          </header>
+          
+  
+  <div class="w">
+    <div id="content" class="clearfix">
+    <h1>Welcome to the search page.</h1><br> 
+    <h3>from here, you can look into the status about the unit that is being repaired</h3><br>
+
+      
+      <section id="bio">
+      <form action="" method="get">
+      <input type="text" name="search" placeholder="Search RMA number or Reference number.">
+      <button type="submit" class="btn btn-default">Search</button>
+      </form>
+       <table>
+          <tr>
+            <th>Rma number</th>
+            <th>Reference number</th>
+            <th>Serial number</th>
+            <th>Status</th>
+            <th>Tracking</th>
+          </tr>
+
+          <?php if(!$search_results) {?>
+          <tr>
+            <td colspan="5"> Please search</td>
+          </tr>
+          <?php 
+          } else { foreach ($search_results['results'] as $search_result) :  ?>
+           
+          <tr>
+            <td><?php echo $search_result->{'RMA No'} ;?> </td>
+            <td><?php echo $search_result->cust_ref_no;?> </td>
+            <td><?php echo $search_result->{'Original SN'};?> </td>
+            <td><?php echo $search_result->{'UID Status'};?> </td>
+            <td><a href="http://wwwapps.ups.com/WebTracking/track?track=yes&trackNums={<?php echo $search_result->{'Tracking No'}; ?>}"><?php echo $search_result->{'Tracking No'}; ?></a></td>
+          </tr>
+          <?php endforeach; }?>
+
+
+            
+        </table>
+        
+      </section>
+      
+      
+        
+        
+        
+        
+      </section>
+    </div><!-- @end #content -->
+  </div><!-- @end #w -->
+<script type="text/javascript">
+$(function(){
+  $('#profiletabs ul li a').on('click', function(e){
+    e.preventDefault();
+    var newcontent = $(this).attr('href');
+    
+    $('#profiletabs ul li a').removeClass('sel');
+    $(this).addClass('sel');
+    
+    $('#content section').each(function(){
+      if(!$(this).hasClass('hidden')) { $(this).addClass('hidden'); }
+    });
+    
+    $(newcontent).removeClass('hidden');
+  });
+});
+</script>
 </body>
+
 </html>

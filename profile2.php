@@ -22,7 +22,7 @@ if(isset($_GET['search']))
   $search_term = $_GET['search'];
 
 
-  $search_results = $search->search($search_term);
+  $search_results = $search->profilesearch($search_term);
 
 }
 
@@ -118,13 +118,14 @@ input[type=text]:focus {
       
       <section id="bio">
       <form action="" method="get">
-      <input type="text" name="search" placeholder="Search RMA number or Reference number.">
+      <input type="text" name="search" placeholder="Search RMA number, RMA Reference Number, or Reference Number.">
       <button type="submit" class="btn btn-default">Search</button>
       </form>
        <table>
           <tr>
             <th>Rma number</th>
             <th>Reference number</th>
+            <th>RMA reference number</th>
             <th>Serial number</th>
             <th>Status</th>
             <th>Tracking</th>
@@ -132,14 +133,15 @@ input[type=text]:focus {
 
           <?php if(!$search_results) {?>
           <tr>
-            <td colspan="5"> Please search</td>
+            <td colspan="6"> Please search</td>
           </tr>
           <?php 
           } else { foreach ($search_results['results'] as $search_result) :  ?>
            
           <tr>
-            <td><?php echo $search_result->{'RMA No'} ;?> </td>
+            <td><?php echo $search_result->{'RMA No'};?> </td>
             <td><?php echo $search_result->cust_ref_no;?> </td>
+            <td><?php echo $search_result->{'RMA Ref No'};?></td>
             <td><?php echo $search_result->{'Original SN'};?> </td>
             <td><?php echo $search_result->{'UID Status'};?> </td>
             <td><a href="http://wwwapps.ups.com/WebTracking/track?track=yes&trackNums={<?php echo $search_result->{'Tracking No'}; ?>}"><?php echo $search_result->{'Tracking No'}; ?></a></td>
